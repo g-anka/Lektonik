@@ -1,0 +1,41 @@
+.header-user-details {
+  height: 60px;
+  background: #ffffff;
+  box-shadow: 0px 4px 40px rgba(0, 6, 32, 0.2);
+}
+
+.header-user-details .container,
+.header-right,
+.header-left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-user-details .container {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo-main {
+  display: inline-block;
+  max-width: 170px;
+}
+
+.small-container {
+  width: 60px;
+  height: 36px;
+  border-radius: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-search {
+  background: #dbdbdb;
+  margin-right: 48px;
+}
+
+.btn-user-details {
+  background: #0025ff;
+}
