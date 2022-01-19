@@ -4,10 +4,6 @@ import "../styles/Header.css";
 
 function Header(props){
 
-    function handleAuth() {
-
-    }
-
     return(
       <header className="header">
           <img className="header-logo" src={require("../img/header_logo.svg").default} alt="логотип" />

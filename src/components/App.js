@@ -4,6 +4,7 @@ import "../styles/style.css";
 import Main from "./Main";
 import VerifyEmail from "./VerifyEmail";
 import ContinueRegistration from "./ContinueRegistration";
+import PersonalDetailsForm from "./PersonalDetailsForm";
 
 
 function App(){
@@ -13,6 +14,7 @@ function App(){
                 <Route path ="/" element={<Main />} />
                 <Route path ="/verify_email" element={<VerifyEmail />} />
                 <Route path ="/continue_registration" element={<ContinueRegistration />} />
+                <Route path ="/user_info-form" element={<PersonalDetailsForm />} />
             </Routes>
         </div>
     )

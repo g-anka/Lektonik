@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import "../styles/Authorization.css";
 import "../styles/style.css";
 import eyeOpen from "../img/eyeOpen.svg";
@@ -93,8 +93,34 @@ function AuthStep2() {
         console.log("VALUE: ", signUpValue)
     }
 
-    //отправка пароля на сервер
-    //в процессе
+    //отправка email и пароля на сервер
+    let userSignUp = {
+        email: window.sessionStorage.getItem("email"),
+        password: signInValue.password
+    };
+    console.log("USER Sign Up: ", userSignUp);
+
+    async function onSubmitSignUp(e) {
+        e.preventDefault();
+        //пока не решена проблема с CORS
+        navigate("/user_info-form");
+
+       /*
+       await fetch('https://dev.lectonic.ru/api/auth/signup/', {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(userSignUp)
+        })
+            .then((response) => {
+                console.log("RESPONSE: ", response);
+            })
+            .catch((error) => {
+                console.log("ERROR: ", error);
+                console.log("ERROR DATA: ", error.response.data)
+            })*/
+    }
 
 
 
@@ -202,8 +228,9 @@ function AuthStep2() {
                     {(signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2) && <div className="auth__form__input-error">Пароли не совпадают</div>}
                     <button className="btn auth__form__btn signUp"
                                 type="submit"
+                                onClick={onSubmitSignUp}
                                 disabled={(!signUpValue.password || !signUpValue.password2) || (signUpValue.password !== signUpValue.password2)}>Продолжить</button>
-                </form>
+                    </form>
             </div>
         </div>
     )
