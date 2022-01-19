@@ -1,0 +1,235 @@
+.auth {
+    margin: 0px 40px;
+    position: relative;
+}
+
+.auth__header {
+    display: flex;
+    margin-bottom: 36px;
+}
+
+.auth__header > p {
+    cursor: pointer;
+    margin: 0px;
+    font-size: 24px;
+    font-height: 24px;
+    font-weight: bold;
+}
+
+.auth__header-signUp {
+    padding-left: 47px;
+}
+
+.auth__text {
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 28px;
+}
+
+.auth__text > span {
+    color: #0025FF;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.auth__form__input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000000;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    caret: #000000;
+}
+
+.auth__form__input.signUpEmail {
+    margin-bottom: 31px;
+}
+
+.auth__form__input.password2 {
+    margin-bottom: 0px;
+}
+
+.auth__form__input::placeholder {
+    color: #B4B4B4;
+}
+
+.auth__form__input-wrapper {
+    position: relative;
+}
+
+.password-icon {
+    cursor: pointer;
+    position: absolute;
+    left: 330px;
+    top: 7px;
+}
+
+.auth__form__password-forgotten {
+    text-align: right;
+    color: #0025FF;
+    font-size: 12px;
+    line-height: 15px;
+    text-decoration: underline;
+    margin-bottom: 23px;
+    cursor: pointer;
+}
+
+
+/*кнопки*/
+.auth__form__btn {
+    border: none;
+    background-color: #B924FF;
+    color: #FFFFFF;
+    margin-bottom: 28px;
+}
+
+.auth__form__btn:hover:not(:disabled) {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.auth__form__btn.signUp {
+    margin: 36px 0px 60px;
+}
+
+
+
+.auth__socials {
+    text-align: center;
+}
+
+.auth__socials > span {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.auth__socials > button {
+    margin-bottom: 12px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.auth__socials > button > img {
+    padding-right: 12px;
+}
+
+.auth__socials__btn-google {
+    background-color: #FFFFFF;
+    border: 1px solid #B4B4B4;
+}
+
+.auth__socials__btn-fb, .auth__socials__btn-vk {
+    background-color: #1877F2;
+    border: none;
+    color: #FFFFFF;
+}
+
+
+
+.auth__socials > p {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 48px;
+    display: inline-block;
+}
+
+.auth__socials > p > span {
+    color: #0025FF;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*валидация*/
+.auth__form__input-error {
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF00C1;
+    margin-top: 4px;
+}
+
+/*checkbox */
+.auth__form__checkbox {
+    cursor: pointer;
+}
+
+.auth__form__checkbox.signIn {
+    margin-bottom: 28px;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type='checkbox'] {
+        --active: #0025FF;
+        --active-inner: #FFFFFF;
+        --border: #FFFFFF;
+        --background: #DBDBDB;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        height: 20px;
+        outline: none;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        margin: 0;
+        cursor: pointer;
+        background: var(--b, var(--background));
+        transition: background 0.3s;
+    }
+    input[type='checkbox']:after {
+        content: '';
+        display: block;
+        left: 0;
+        top: 0;
+        position: absolute;
+        transition: transform var(--d-t, 0.6s) var(--d-t-e, ease), opacity var(--d-o, 0.9s)
+    }
+    input[type='checkbox']:checked {
+        --b: var(--active);
+        --bc: var(--active);
+        --d-o: 0.3s;
+        --d-t: 0.6s;
+        --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+    }
+
+    input[type='checkbox'] + label {
+        font-size: 12px;
+        line-height: 15px;
+        display: inline-block;
+        vertical-align: center;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+    #auth__form__checkbox-signUpLabel {
+        position: absolute;
+        right: -20px;
+        top: 172px;
+    }
+
+    input[type='checkbox'].auth__form__checkbox-switch {
+        width: 36px;
+        border-radius: 45px;
+    }
+    input[type='checkbox'].auth__form__checkbox-switch:after {
+        left: 2px;
+        top: 2px;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        background: var(--ab, var(--border));
+        transform: translateX(var(--x, 0));
+    }
+    input[type='checkbox'].auth__form__checkbox-switch:checked {
+        --ab: var(--active-inner);
+        --x: 16px;
+    }
+}
+

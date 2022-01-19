@@ -1,0 +1,25 @@
+.verify__wrapper {
+    text-align: center;
+}
+.verify__wrapper > p {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0px 0px 12px;
+}
+
+h1 {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 120px 0px 36px;
+}
+
+#verify__email {
+    font-weight: bold;
+}
+
+.temporary__btn {
+    border: none;
+    background-color: #B924FF;
+    color: #FFFFFF;
+    margin-top: 100px;
+}

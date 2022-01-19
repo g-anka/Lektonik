@@ -1,0 +1,38 @@
+@font-face {
+    src: url('../fonts/Montserrat-Regular.ttf');
+    font-family: "Montserrat Regular";
+}
+
+@font-face {
+    src: url("../fonts/Montserrat-Medium.ttf");
+    font-family: "Montserrat Medium";
+}
+
+@font-face {
+    src: url("../fonts/Montserrat-Bold.ttf");
+    font-family: "Montserrat Bold";
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    color: #000000;
+    background-color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* КНОПКИ */
+.btn {
+    width: 352px;
+    border-radius: 30px;
+    font-weight:500;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 14px 0px;
+    cursor: pointer;
+}
+
+.btn:disabled {
+    background-color: #C4C4C4;
+    cursor: not-allowed;
+}
