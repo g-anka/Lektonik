@@ -3,7 +3,7 @@ import Header from "./Header";
 import Modal from "./Modal";
 import profileSelected from "../img/header_profile-selected.svg";
 import profile from "../img/header_profile.svg";
-import AuthStep2 from "./AuthStep2";
+import AuthSignUpPassword from "./AuthSignUpPassword";
 
 
 function ContinueRegistration(){
@@ -18,7 +18,7 @@ function ContinueRegistration(){
             <Modal
                 isOpened={open}
                 onModalClose={() => setOpen(false)}>
-                <AuthStep2 />
+                <AuthSignUpPassword />
             </Modal>
         </div>
     )

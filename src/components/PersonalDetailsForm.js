@@ -3,6 +3,8 @@ import DropDownElement from "./DropdownElement";
 import Header from "./Header";
 import "../styles/personaldetailsform.css";
 import placeIcon from "../img/icon_place.svg";
+import profileSelected from "../img/header_profile-selected.svg";
+import profile from "../img/header_profile.svg";
 
 
 export default function PersonalDetailsForm() {
@@ -48,58 +50,49 @@ export default function PersonalDetailsForm() {
 
   return (
     <>
-      <Header></Header>
+      <Header src={profileSelected} />
 
       <div className="user-details-wrapper">
         <h2 className="submain-title">Информация базового профиля</h2>
-        <p className="general-text">Заполните информацию профиля.</p>
-        <p className="general-text">
-          Это даст Вам возможность пользоваться сервисом
-        </p>
+        <p className="general-text">Заполните информацию профиля.<br/>Это даст Вам возможность пользоваться сервисом.</p>
+
         <form className="user-details-form" onSubmit={(e) => handleAddEvent(e)}>
           <div className="input-container">
             <input
-              className={
-                userDetails.userSurname ? "input input-active" : "input"
-              }
+              className="form__input"
               value={userDetails.userSurname}
               type="text"
               placeholder="Фамилия"
-              onChange={(e) => handleInputChange(e, "userSurname")}
-            ></input>
+              onChange={(e) => handleInputChange(e, "userSurname")} />
             <p className="special-sign">*</p>
           </div>
+
           <div className="input-container">
             <input
+              className="form__input"
               value={userDetails.userFirstName}
-              className={
-                userDetails.userFirstName ? "input input-active" : "input"
-              }
               type="text"
               placeholder="Имя"
-              onChange={(e) => handleInputChange(e, "userFirstName")}
-            ></input>
+              onChange={(e) => handleInputChange(e, "userFirstName")} />
             <p className="special-sign">*</p>
           </div>
+
           <div className="input-container">
             <input
+              className="form__input"
               value={userDetails.userMiddleName}
-              className={
-                userDetails.userMiddleName ? "input input-active" : "input"
-              }
               type="text"
               placeholder="Отчество"
-              onChange={(e) => handleInputChange(e, "userMiddleName")}
-            ></input>
+              onChange={(e) => handleInputChange(e, "userMiddleName")} />
             <p className="special-sign">*</p>
           </div>
+
           <div className="input-container">
             <div className="small-container place">
               <img
                 className="icon-small"
                 alt="search-icon"
-                src={placeIcon}
-              ></img>
+                src={placeIcon} />
             </div>
             <DropDownElement
               selectDetails={citySelect}

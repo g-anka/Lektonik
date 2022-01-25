@@ -8,16 +8,13 @@
     margin-bottom: 36px;
 }
 
-.auth__header > p {
+h2 {
     cursor: pointer;
     margin: 0px;
-    font-size: 24px;
-    font-height: 24px;
-    font-weight: bold;
 }
 
-.auth__header-signUp {
-    padding-left: 47px;
+h2:first-child {
+    padding-right: 47px;
 }
 
 .auth__text {
@@ -27,77 +24,64 @@
     margin-bottom: 28px;
 }
 
-.auth__text > span {
-    color: #0025FF;
-    text-decoration: underline;
+h5 {
+    color: var(--main-blue);
     cursor: pointer;
-    font-weight: 700;
-}
-
-.auth__form__input {
-    width: 100%;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #000000;
-    font-size: 14px;
-    line-height: 17px;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    cursor: pointer;
-    caret: #000000;
-}
-
-.auth__form__input.signUpEmail {
-    margin-bottom: 31px;
-}
-
-.auth__form__input.password2 {
-    margin-bottom: 0px;
-}
-
-.auth__form__input::placeholder {
-    color: #B4B4B4;
-}
-
-.auth__form__input-wrapper {
-    position: relative;
-}
-
-.password-icon {
-    cursor: pointer;
-    position: absolute;
-    left: 330px;
-    top: 7px;
+    display: inline;
+    margin: 0px;
 }
 
 .auth__form__password-forgotten {
     text-align: right;
-    color: #0025FF;
+    color: var(--main-blue);
     font-size: 12px;
     line-height: 15px;
     text-decoration: underline;
-    margin-bottom: 23px;
+    margin: 12px 0px 23px;
     cursor: pointer;
 }
 
-
-/*кнопки*/
-.auth__form__btn {
-    border: none;
-    background-color: #B924FF;
-    color: #FFFFFF;
+/*ИНПУТЫ*/
+.auth__form__input-wrapper:first-child {
     margin-bottom: 28px;
 }
 
-.auth__form__btn:hover:not(:disabled) {
-    color: rgba(255, 255, 255, 0.6);
+.form__input.password2 {
+    margin-bottom: 0px;
+}
+
+
+
+/*ИНПУТ ПРИ ОШИБКЕ*/
+.form__input-error {
+    font-size: 12px;
+    line-height: 15px;
+    color: var(--add-pink);
+    margin-top: 4px;
+}
+
+
+/* ИКОНКИ СКРЫТЬ И ПОКАЗАТЬ ПАРОЛЬ */
+.password-icon {
+    cursor: pointer;
+    position: absolute;
+    left: 330px;
+    top: 165px;
+}
+
+.password-icon.password1 {
+    top: 111px;
+}
+
+
+/*КНОПКИ*/
+.auth__form__btn {
+    margin-bottom: 28px;
 }
 
 .auth__form__btn.signUp {
     margin: 36px 0px 60px;
 }
-
-
 
 .auth__socials {
     text-align: center;
@@ -111,9 +95,16 @@
 }
 
 .auth__socials > button {
+    width: 352px;
+    height: 48px;
     margin-bottom: 12px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
@@ -122,55 +113,43 @@
 }
 
 .auth__socials__btn-google {
-    background-color: #FFFFFF;
-    border: 1px solid #B4B4B4;
+    color: var(--main-black);
+    background-color: var(--main-white);
+    border: 1px solid var(--add-darkGrey);
 }
 
 .auth__socials__btn-fb, .auth__socials__btn-vk {
     background-color: #1877F2;
     border: none;
-    color: #FFFFFF;
+    color: var(--main-white);
 }
 
-
-
-.auth__socials > p {
+.auth__bottom-text {
     font-size: 14px;
     line-height: 17px;
-    margin-bottom: 48px;
-    display: inline-block;
-}
-
-.auth__socials > p > span {
-    color: #0025FF;
-    font-weight: 700;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/*валидация*/
-.auth__form__input-error {
-    font-size: 12px;
-    line-height: 15px;
-    color: #FF00C1;
-    margin-top: 4px;
+    text-align: center;
+    padding: 8px 0px 48px;
+    display: block;
 }
 
 /*checkbox */
-.auth__form__checkbox {
+.auth__form__checkbox-wrapper {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.auth__form__checkbox.signIn {
+.auth__form__checkbox-wrapper.signIn {
     margin-bottom: 28px;
 }
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
     input[type='checkbox'] {
-        --active: #0025FF;
-        --active-inner: #FFFFFF;
-        --border: #FFFFFF;
-        --background: #DBDBDB;
+        --active: var(--main-blue);
+        --active-inner: var(--main-white);
+        --border: var(--main-white);
+        --background: var(--add-grey);
         -webkit-appearance: none;
         -moz-appearance: none;
         height: 20px;
@@ -211,7 +190,7 @@
     #auth__form__checkbox-signUpLabel {
         position: absolute;
         right: -20px;
-        top: 172px;
+        top: 2px;
     }
 
     input[type='checkbox'].auth__form__checkbox-switch {
@@ -232,4 +211,7 @@
         --x: 16px;
     }
 }
+
+
+
 

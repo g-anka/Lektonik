@@ -1,17 +1,20 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import {useNavigate, Link} from "react-router-dom";
 import "../styles/Authorization.css";
 import "../styles/style.css";
 import eyeOpen from "../img/eyeOpen.svg";
 import eyeClose from "../img/eyeClose.svg";
 import 'regenerator-runtime/runtime';
 
-function Authorization() {
+function AuthSignUpPassword() {
 
-    const navigate = useNavigate(); //Для перехода
+//!!!ниже будет повторение кода из Authorisation.js, пока так, лаконичное решение будет позже
 
-    //ВХОД
-    //изменение значений в инпутах
+//Для перехода
+    const navigate = useNavigate();
+
+//ВХОД
+//изменение значений в инпутах
     const [signInValue, setSignInValue] = useState({
         email: "",
         password: ""
@@ -22,7 +25,7 @@ function Authorization() {
         console.log("VALUE: ", signInValue)
     }
 
-    //отправка данных на сервер
+//отправка данных на сервер
     let userSignIn = {
         email: signInValue.email,
         password: signInValue.password
@@ -48,17 +51,18 @@ function Authorization() {
             })
     }
 
-    //Checkbox не выходить из системы
+//Checkbox не выходить из системы
     const [loggedIn, setLoggedIn] = useState(false);
 
     function onChangeLoggedIn(){
         setLoggedIn(!loggedIn)
     }
 
-    //РЕГИСТРАЦИЯ
-    //изменение значений в инпутах
+
+
+//РЕГИСТРАЦИЯ
+//изменение значений в инпутах
     const [signUpValue, setSignUpValue] = useState({
-        name: "",
         email: "",
         password: "",
         password2: ""
@@ -69,30 +73,24 @@ function Authorization() {
         console.log("VALUE: ", signUpValue)
     }
 
-
-
-    //отправка данных на сервер
-    //ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
-    function onSubmitSignUpEmail(e) {
-        e.preventDefault();
-        window.sessionStorage.setItem("email", signUpValue.email);
-        console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
-        navigate("/verify_email");
-    }
-
-
-   /* let userSignUp = {
-        name: signUpValue.name,
-        email: signUpValue.email,
-        password: signUpValue.password
+//отправка email и пароля на сервер
+    let userSignUp = {
+        email: window.sessionStorage.getItem("email"),
+        password: signInValue.password
     };
     console.log("USER Sign Up: ", userSignUp);
-    console.log("REQ MY: ", JSON.stringify(userSignUp));
 
     async function onSubmitSignUp(e) {
         e.preventDefault();
-        await fetch('', {
+        //пока не решена проблема с сервером
+        navigate("/user_info-form");
+
+       /*
+       await fetch('https://dev.lectonic.ru/api/auth/signup/', {
             method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(userSignUp)
         })
             .then((response) => {
@@ -101,19 +99,14 @@ function Authorization() {
             .catch((error) => {
                 console.log("ERROR: ", error);
                 console.log("ERROR DATA: ", error.response.data)
-            })
-    }*/
-
-    //Checkbox согласие на обработку персональных данных
-    const [agree, setAgree] = useState(false);
-
-    function handleAgree(){
-        setAgree(!agree)
+            })*/
     }
 
-    //переключение блоков Вход и Регистрация
-    const [signInShown, setSignInShown] = useState(true);
-    const [signUpShown, setSignUpShown] = useState(false);
+
+
+//переключение блоков Вход и Регистрация
+    const [signInShown, setSignInShown] = useState(false);
+    const [signUpShown, setSignUpShown] = useState(true);
 
     function handleSignInShow() {
         setSignInShown(true);
@@ -125,11 +118,23 @@ function Authorization() {
         setSignUpShown(true);
     }
 
-    //Показать / скрыть пароль
+//Показать / скрыть пароль на входе
     const [hiddenSignIn, setHiddenSignIn] = useState(true);
 
     function handleHiddenSignIn() {
         setHiddenSignIn(!hiddenSignIn)
+    }
+
+//Показать / скрыть пароль на регистрации
+    const [hiddenSignUp1, setHiddenSignUp1] = useState(true);
+    const [hiddenSignUp2, setHiddenSignUp2] = useState(true);
+
+    function handleHiddenSignUp1() {
+        setHiddenSignUp1(!hiddenSignUp1)
+    }
+
+    function handleHiddenSignUp2() {
+        setHiddenSignUp2(!hiddenSignUp2)
     }
 
 
@@ -148,27 +153,27 @@ function Authorization() {
                 <div className="auth__text">Войдите в свой аккаунт</div>
                 <form className="auth__form">
                     <div className="auth__form__input-wrapper">
-                    <input className="form__input"
-                           name="email"
-                           type="email"
-                           placeholder="E-mail"
-                           value={signInValue.email}
-                           onChange={onChangeSignIn} />
+                        <input className="form__input"
+                               name="email"
+                               type="email"
+                               placeholder="E-mail"
+                               value={signInValue.email}
+                               onChange={onChangeSignIn} />
                     </div>
 
                     <div className="auth__form__input-wrapper">
-                    <input className="form__input"
-                           name="password"
-                           type={ hiddenSignIn ? "password" : "text" }
-                           placeholder="Пароль"
-                           value={signInValue.password}
-                           onChange={onChangeSignIn}
-                    />
-                    <img
-                        className="password-icon"
-                        src={ hiddenSignIn ? eyeClose : eyeOpen}
-                        alt={ hiddenSignIn ? "показать" : "скрыть"}
-                        onClick={handleHiddenSignIn} />
+                        <input className="form__input"
+                               name="password"
+                               type={ hiddenSignIn ? "password" : "text" }
+                               placeholder="Пароль"
+                               value={signInValue.password}
+                               onChange={onChangeSignIn}
+                        />
+                        <img
+                            className="password-icon"
+                            src={ hiddenSignIn ? eyeClose : eyeOpen}
+                            alt={ hiddenSignIn ? "показать" : "скрыть"}
+                            onClick={handleHiddenSignIn} />
                     </div>
 
                     <div className="auth__form__password-forgotten">Забыли пароль?</div>
@@ -199,36 +204,50 @@ function Authorization() {
 
             </div>
 
-            {/* Блок Регистрация Почта*/}
+            {/* Блок Регистрация Пароль*/}
             <div style={{display: signUpShown ? "block" : "none"}}>
-                <div className="auth__text">Для регистрации введите Ваш e-mail</div>
+                <div className="auth__text">Придумайте пароль</div>
                 <form className="auth__form">
                     <div className="auth__form__input-wrapper">
-                    <input className="form__input signUpEmail"
-                           name="email"
-                           type="email"
-                           placeholder="E-mail"
-                           value={signUpValue.email}
-                           onChange={onChangeSignUp} />
+                        <input className="form__input"
+                               name="password"
+                               type={ hiddenSignUp1 ? "password" : "text" }
+                               placeholder="Пароль"
+                               value={signUpValue.password}
+                               onChange={onChangeSignUp}
+                        />
+                        <img
+                            className="password-icon password1"
+                            src={ hiddenSignUp1 ? eyeClose : eyeOpen}
+                            alt={ hiddenSignUp1 ? "показать" : "скрыть"}
+                            onClick={handleHiddenSignUp1} />
                     </div>
 
-                    <div className="auth__form__checkbox-wrapper">
-                        <input className="auth__form__checkbox-switch"
-                               id="checkbox"
-                               type="checkbox"
-                               checked={agree}
-                               onChange={handleAgree} />
-                        <label id="auth__form__checkbox-signUpLabel" htmlFor="checkbox">Я даю согласие на обработку персональных данных</label>
+                    <div className="auth__form__input-wrapper">
+                        <input className="form__input password2"
+                               name="password2"
+                               type={ hiddenSignUp2 ? "password" : "text" }
+                               placeholder="Повторите пароль"
+                               value={signUpValue.password2}
+                               onChange={onChangeSignUp}
+                               style={{borderBottom: ((signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2)) ? "1px solid var(--add-pink)" : ""}}
+                        />
+                        <img
+                            className="password-icon"
+                            src={ hiddenSignUp2 ? eyeClose : eyeOpen}
+                            alt={ hiddenSignUp2 ? "показать" : "скрыть"}
+                            onClick={handleHiddenSignUp2} />
+                    {(signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2) && <div className="form__input-error">Пароли не совпадают</div>}
                     </div>
 
                     <button className="btn auth__form__btn signUp"
                                 type="submit"
-                                disabled={!agree}
-                                onClick={onSubmitSignUpEmail}>Зарегистрироваться</button>
-                </form>
+                                onClick={onSubmitSignUp}
+                                disabled={(!signUpValue.password || !signUpValue.password2) || (signUpValue.password !== signUpValue.password2)}>Продолжить</button>
+                    </form>
             </div>
         </div>
     )
 };
 
-export default Authorization;
+export default AuthSignUpPassword;
