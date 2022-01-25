@@ -50,14 +50,9 @@ h5 {
     margin-bottom: 0px;
 }
 
-.password-icon {
-    cursor: pointer;
-    position: absolute;
-    left: 330px;
-    top: 165px;
-}
 
-/*валидация*/
+
+/*ИНПУТ ПРИ ОШИБКЕ*/
 .form__input-error {
     font-size: 12px;
     line-height: 15px;
@@ -65,7 +60,21 @@ h5 {
     margin-top: 4px;
 }
 
-/*кнопки*/
+
+/* ИКОНКИ СКРЫТЬ И ПОКАЗАТЬ ПАРОЛЬ */
+.password-icon {
+    cursor: pointer;
+    position: absolute;
+    left: 330px;
+    top: 165px;
+}
+
+.password-icon.password1 {
+    top: 111px;
+}
+
+
+/*КНОПКИ*/
 .auth__form__btn {
     margin-bottom: 28px;
 }
