@@ -12,7 +12,6 @@ const Modal = props => {
                      onClick={props.onModalClose} />
 
                      {props.children}
-
             </div>
         </div>
     )

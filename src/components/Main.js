@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import Authorization from "./Authorization";
 import profileSelected from "../img/header_profile-selected.svg";
 import profile from "../img/header_profile.svg";
+import "../styles/Main.css";
 
 
 function Main(){
@@ -11,7 +12,7 @@ function Main(){
     const [open, setOpen] = useState(false); //открыто модальное окно или нет
 
     return(
-        <div className="main">
+        <>
             <Header
                 src={open ? profileSelected : profile}
                 onOpenAuth={() => setOpen(true)}/>
@@ -20,7 +21,10 @@ function Main(){
                 onModalClose={() => setOpen(false)}>
                 <Authorization />
             </Modal>
-        </div>
+            <img className="main__illustration"
+                 src={require("../img/main-pic.svg").default}
+                 alt="Платформа для лекторов и не только"/>
+        </>
     )
 }
 

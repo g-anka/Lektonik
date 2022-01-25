@@ -128,7 +128,7 @@ h5 {
 }
 
 .form__input:focus {
-    border-bottom: 1px solid var(--main-blue);
+    border-bottom: 1px solid var(--main-blue) !important;
 }
 
 .form__input:not(:placeholder-shown) {

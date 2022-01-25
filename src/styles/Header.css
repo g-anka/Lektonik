@@ -16,6 +16,10 @@ header {
     margin-right: 60px;
 }
 
-.header__nav-profile {
+.header__nav-search, .header__nav-profile {
     cursor: pointer;
+}
+
+.header__nav-search {
+    margin-right: 48px;
 }
