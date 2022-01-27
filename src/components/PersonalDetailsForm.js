@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import DropDownElement from "./DropdownElement";
 import Header from "./Header";
 import "../styles/personaldetailsform.css";
-import placeIcon from "../img/icon_place.svg";
+import placeIcon from "../img/location-icon.svg";
+import infoIcon from "../img/info-icon.svg";
 import profileSelected from "../img/header_profile-selected.svg";
 import profile from "../img/header_profile.svg";
 
@@ -87,13 +88,10 @@ export default function PersonalDetailsForm() {
             <p className="special-sign">*</p>
           </div>
 
-          <div className="input-container">
-            <div className="small-container place">
+          <div className="input-with-icon">
               <img
-                className="icon-small"
-                alt="search-icon"
-                src={placeIcon} />
-            </div>
+                  className="location-icon"
+                  src={placeIcon} />
             <DropDownElement
               selectDetails={citySelect}
               className="select-city"
@@ -107,11 +105,16 @@ export default function PersonalDetailsForm() {
             <DropDownElement selectDetails={citySelect}></DropDownElement>
             <p className="special-sign">*</p>
           </div> */}
-          <textarea
-            value={userDetails.userSelfDescription}
-            placeholder="Напишите о себе"
-            onChange={(e) => handleInputChange(e, "userSelfDescription")}
-          ></textarea>
+          <div className="input-with-icon">
+            <img
+                className="info-icon"
+                src={infoIcon} />
+            <textarea
+              value={userDetails.userSelfDescription}
+              placeholder="Напишите о себе"
+              onChange={(e) => handleInputChange(e, "userSelfDescription")}
+            ></textarea>
+          </div>
           <button className="btn btn-main" onClick={(e) => handleAddEvent(e)}>
             <div>Завершить регистрацию</div>
           </button>

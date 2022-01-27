@@ -20,6 +20,7 @@ body {
     color: var(--main-black);
     background-color: var(--main-white);
     font-family: 'Montserrat', sans-serif;
+    height: 100vh;
 }
 
 /*Заголовки*/

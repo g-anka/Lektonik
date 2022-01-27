@@ -41,6 +41,8 @@
   padding-left: 20px;
   font-size: 14px;
   line-height: 17px;
+  margin-bottom: 96px;
+  margin-top: 20px;
 }
 
 .user-details-form textarea::-webkit-input-placeholder {
@@ -96,3 +98,18 @@
   font-weight: 500;
 }
 
+.input-with-icon {
+  display: flex;
+  margin-left: -75px;
+}
+
+.input-with-icon > img {
+  margin-right: 12px;
+}
+
+.location-icon {
+  margin-top: 5px;
+}
+.info-icon {
+  margin-top: -230px;
+}
