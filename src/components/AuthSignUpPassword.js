@@ -76,30 +76,42 @@ function AuthSignUpPassword() {
 //отправка email и пароля на сервер
     let userSignUp = {
         email: window.sessionStorage.getItem("email"),
-        password: signInValue.password
+        password: signUpValue.password
     };
-    console.log("USER Sign Up: ", userSignUp);
+    console.log("USER Sign Up JSON: ", JSON.stringify(userSignUp));
 
     async function onSubmitSignUp(e) {
         e.preventDefault();
-        //пока не решена проблема с сервером
-        navigate("/user_info-form");
-
-       /*
-       await fetch('https://dev.lectonic.ru/api/auth/signup/', {
-            method: 'POST',
+        await fetch("https://dev.lectonic.ru/api/auth/signup/", {
+            method: "POST",
             headers: {
-                'Access-Control-Allow-Origin': '*'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(userSignUp)
         })
             .then((response) => {
-                console.log("RESPONSE: ", response);
+                console.log("RESPONSE SIGNUP: ", response);
+                if (response.status == 201) {
+                    return fetch("https://dev.lectonic.ru/api/auth/login/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(userSignUp)
+                    }).then((response) => {
+                        console.log("RESPONSE LOGIN: ", response);
+                        return response.json();
+                    }).then((data) => {
+                        console.log("data: ", data);
+                        localStorage.setItem("auth_token", data.auth_token);
+                        navigate("/user_info-form");
+                    })
+                }
             })
             .catch((error) => {
                 console.log("ERROR: ", error);
                 console.log("ERROR DATA: ", error.response.data)
-            })*/
+            })
     }
 
 
@@ -237,7 +249,7 @@ function AuthSignUpPassword() {
                             src={ hiddenSignUp2 ? eyeClose : eyeOpen}
                             alt={ hiddenSignUp2 ? "показать" : "скрыть"}
                             onClick={handleHiddenSignUp2} />
-                    {(signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2) && <div className="form__input-error">Пароли не совпадают</div>}
+                    {(signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2) && <div className="form__input-error">Пароль не совпадает</div>}
                     </div>
 
                     <button className="btn auth__form__btn signUp"

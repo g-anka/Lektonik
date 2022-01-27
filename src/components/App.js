@@ -7,6 +7,7 @@ import ContinueRegistration from "./ContinueRegistration";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import NotFoundPage from "./NotFoundPage";
 import Footer from "./Footer";
+import UserProfile from "./UserProfile";
 
 
 function App(){
@@ -14,13 +15,17 @@ function App(){
 
     return(
         <div className="App">
+            <main className="main">
+
             <Routes>
                 <Route path ="/" element={<Main />} />
                 <Route path ="/verify_email" element={<VerifyEmail />} />
                 <Route path ="/continue_registration" element={<ContinueRegistration />} />
                 <Route path ="/user_info-form" element={<PersonalDetailsForm />} />
+                <Route path ="/user_profile" element={<UserProfile />} />
                 <Route path ="*" element={<NotFoundPage />} />
             </Routes>
+            </main>
             <Footer />
         </div>
     )

@@ -134,3 +134,7 @@ h5 {
 .form__input:not(:placeholder-shown) {
     border-bottom: 1px solid var(--add-darkGrey);
 }
+
+.main {
+    flex-grow: 1;
+}

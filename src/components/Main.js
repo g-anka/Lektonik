@@ -5,6 +5,7 @@ import Authorization from "./Authorization";
 import profileSelected from "../img/header_profile-selected.svg";
 import profile from "../img/header_profile.svg";
 import "../styles/Main.css";
+import Footer from "./Footer";
 
 
 function Main(){

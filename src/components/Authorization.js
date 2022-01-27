@@ -10,8 +10,12 @@ function Authorization() {
 
     const navigate = useNavigate(); //Для перехода
 
-    //ВХОД
-    //изменение значений в инпутах
+    //вывод текста ошибки под инпутами
+    const [errorMessageEmail, setErrorMessageEmail] = useState("");
+    const [errorMessagePassword, setErrorMessagePassword] = useState("");
+
+//ВХОД
+//изменение значений в инпутах
     const [signInValue, setSignInValue] = useState({
         email: "",
         password: ""
@@ -22,7 +26,7 @@ function Authorization() {
         console.log("VALUE: ", signInValue)
     }
 
-    //отправка данных на сервер
+//отправка данных на сервер
     let userSignIn = {
         email: signInValue.email,
         password: signInValue.password
@@ -34,29 +38,51 @@ function Authorization() {
         await fetch('https://dev.lectonic.ru/api/auth/login/', {
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin': '*'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(userSignIn),
-
         })
             .then((response) => {
-                console.log("RESPONSE: ", response);
+                console.log("RESPONSE SignIn: ", response);
+                setErrorMessageEmail(""); //очищаем стейты, чтоб при новом запросе они исчезли
+                setErrorMessagePassword("");
+                return response.json();
+            }).then((data) => {
+               console.log("data: ", data);
+               //ниже идет проверка наличия ключа в объекте дата.
+                // Они именуются по-разному и в каждом описана своя ошибка. Надо подумать как еще это решить.
+               if ("email" in data) {
+                   setErrorMessageEmail(data.email[0]);
+               } if ("non_field_errors" in data) {
+                   if (data.non_field_errors[0] == "Неверный пароль") {
+                       setErrorMessagePassword(data.non_field_errors[0]);
+                   } else {
+                       setErrorMessageEmail(data.non_field_errors[0]);
+                   }
+                } if ("detail" in data) {
+                    setErrorMessageEmail(data.detail);
+                } if ("auth_token" in data) {
+                    localStorage.setItem("auth_token", data.auth_token);
+                    navigate("/user_profile");
+                }
             })
             .catch((error) => {
-                console.log("ERROR: ", error);
-                console.log("ERROR DATA: ", error.response.data)
+                console.log("ERROR SignIn: ", error);
             })
     }
 
-    //Checkbox не выходить из системы
+//Checkbox не выходить из системы
     const [loggedIn, setLoggedIn] = useState(false);
 
     function onChangeLoggedIn(){
         setLoggedIn(!loggedIn)
     }
 
-    //РЕГИСТРАЦИЯ
-    //изменение значений в инпутах
+
+
+
+//РЕГИСТРАЦИЯ
+//изменение значений в инпутах
     const [signUpValue, setSignUpValue] = useState({
         name: "",
         email: "",
@@ -69,10 +95,8 @@ function Authorization() {
         console.log("VALUE: ", signUpValue)
     }
 
-
-
-    //отправка данных на сервер
-    //ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
+//отправка данных на сервер
+//ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
     function onSubmitSignUpEmail(e) {
         e.preventDefault();
         window.sessionStorage.setItem("email", signUpValue.email);
@@ -80,38 +104,14 @@ function Authorization() {
         navigate("/verify_email");
     }
 
-
-   /* let userSignUp = {
-        name: signUpValue.name,
-        email: signUpValue.email,
-        password: signUpValue.password
-    };
-    console.log("USER Sign Up: ", userSignUp);
-    console.log("REQ MY: ", JSON.stringify(userSignUp));
-
-    async function onSubmitSignUp(e) {
-        e.preventDefault();
-        await fetch('', {
-            method: 'POST',
-            body: JSON.stringify(userSignUp)
-        })
-            .then((response) => {
-                console.log("RESPONSE: ", response);
-            })
-            .catch((error) => {
-                console.log("ERROR: ", error);
-                console.log("ERROR DATA: ", error.response.data)
-            })
-    }*/
-
-    //Checkbox согласие на обработку персональных данных
+//Checkbox согласие на обработку персональных данных
     const [agree, setAgree] = useState(false);
 
     function handleAgree(){
         setAgree(!agree)
     }
 
-    //переключение блоков Вход и Регистрация
+//переключение блоков Вход и Регистрация
     const [signInShown, setSignInShown] = useState(true);
     const [signUpShown, setSignUpShown] = useState(false);
 
@@ -125,7 +125,7 @@ function Authorization() {
         setSignUpShown(true);
     }
 
-    //Показать / скрыть пароль
+//Показать / скрыть пароль
     const [hiddenSignIn, setHiddenSignIn] = useState(true);
 
     function handleHiddenSignIn() {
@@ -153,7 +153,9 @@ function Authorization() {
                            type="email"
                            placeholder="E-mail"
                            value={signInValue.email}
-                           onChange={onChangeSignIn} />
+                           onChange={onChangeSignIn}
+                           style={{borderBottom: errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
+                    {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
                     </div>
 
                     <div className="auth__form__input-wrapper">
@@ -163,7 +165,8 @@ function Authorization() {
                            placeholder="Пароль"
                            value={signInValue.password}
                            onChange={onChangeSignIn}
-                    />
+                           style={{borderBottom: errorMessagePassword ? "1px solid var(--add-pink)" : ""}}/>
+                    {errorMessagePassword && <div className="form__input-error">{errorMessagePassword}</div>}
                     <img
                         className="password-icon"
                         src={ hiddenSignIn ? eyeClose : eyeOpen}
