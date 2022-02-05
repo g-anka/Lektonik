@@ -74,6 +74,9 @@ function AuthSignUpPassword() {
         console.log("VALUE: ", signUpValue)
     }
 
+//стейты для вывода ошибок с сервера при регистрации пароля
+    const [errorSignUpPassword, setErrorSignUpPassword] = useState("");
+
 //отправка email и пароля на сервер
     let userSignUp = {
         email: window.sessionStorage.getItem("email"),
@@ -92,7 +95,16 @@ function AuthSignUpPassword() {
         })
             .then((response) => {
                 console.log("RESPONSE SIGNUP: ", response);
-                if (response.status == 201) {
+                return response.json();
+            }).then((data) => {
+                console.log("data: ", data);
+                if ("password" in data) {
+                    setErrorSignUpPassword(data.password[0])
+                }
+    })
+            //пока не решен вопрос с критериями пароля
+
+               /* if (response.status == 201) {
                     return fetch(`${baseURL}/api/auth/login/`, {
                         method: "POST",
                         headers: {
@@ -108,7 +120,7 @@ function AuthSignUpPassword() {
                         navigate("/user_info-form");
                     })
                 }
-            })
+            })*/
             .catch((error) => {
                 console.log("ERROR: ", error);
                 console.log("ERROR DATA: ", error.response.data)
@@ -246,6 +258,7 @@ function AuthSignUpPassword() {
                                placeholder="Пароль"
                                value={signUpValue.password}
                                onChange={onChangeSignUp}
+                               style={{borderBottom: errorSignUpPassword ? "1px solid var(--add-pink)" : ""}}
                         />
                         <img
                             className="password-icon password1"
@@ -261,8 +274,9 @@ function AuthSignUpPassword() {
                                placeholder="Повторите пароль"
                                value={signUpValue.password2}
                                onChange={onChangeSignUp}
-                               style={{borderBottom: ((signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2)) ? "1px solid var(--add-pink)" : ""}}
+                               style={{borderBottom: errorSignUpPassword || ((signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2)) ? "1px solid var(--add-pink)" : ""}}
                         />
+                        {errorSignUpPassword && <div className="form__input-error">{errorSignUpPassword}</div>}
                         <img
                             className="password-icon"
                             src={ hiddenSignUp ? eyeClose : eyeOpen}

@@ -7,7 +7,7 @@ import eyeClose from "../img/eyeClose.svg";
 import 'regenerator-runtime/runtime';
 import { baseURL } from "../ProjectConstants.js";
 
-function Authorization() {
+export default function Authorization() {
 
     const navigate = useNavigate(); //Для перехода
 
@@ -53,20 +53,14 @@ function Authorization() {
                console.log("data: ", data);
                //ниже идет проверка наличия ключа в объекте дата.
                 // Они именуются по-разному и в каждом описана своя ошибка. Надо подумать как еще это решить.
-               if ("email" in data) {
-                   setErrorMessageEmail(data.email[0]);
-               } if ("non_field_errors" in data) {
-                   if (data.non_field_errors[0] == "Неверный пароль") {
-                       setErrorMessagePassword(data.non_field_errors[0]);
-                   } else {
-                       setErrorMessageEmail(data.non_field_errors[0]);
-                   }
-                } if ("detail" in data) {
+           /*  if ("non_field_errors" in data) {
+                 setErrorMessagePassword(data.non_field_errors[0]);
+             } if ("detail" in data) {
                     setErrorMessageEmail(data.detail);
                 } if ("auth_token" in data) {
                     localStorage.setItem("auth_token", data.auth_token);
-                    navigate("/user_profile");
-                }
+                  //  navigate("/user_profile");
+                }*/
             })
             .catch((error) => {
                 console.log("ERROR SignIn: ", error);
@@ -111,19 +105,13 @@ function Authorization() {
 
 //отправка данных на сервер
 //ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
+
     function onSubmitSignUpEmail(e) {
         e.preventDefault();
 
-        let inputEmail = signUpValue.email;
-
-        switch(inputEmail) {
-            case "":
-                setErrorM("Поле не может быть пустым");
-                break;
-        }
-        window.sessionStorage.setItem("email", signUpValue.email);
-        console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
-        navigate("/verify_email");
+       window.sessionStorage.setItem("email", signUpValue.email);
+       console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
+       navigate("/verify_email");
     }
 
 //Checkbox согласие на обработку персональных данных
@@ -197,8 +185,8 @@ function Authorization() {
                            placeholder="E-mail"
                            value={signInValue.email}
                            onChange={onChangeSignIn}
-                           style={{borderBottom: errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
-                        {errorM && <div className="form__input-error">{errorM}</div>}
+                           style={{borderBottom: errorMessagePassword || errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
+                        {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
                     </div>
 
                     <div className="auth__form__input-wrapper">
@@ -303,4 +291,3 @@ function Authorization() {
     )
 };
 
-export default Authorization;
