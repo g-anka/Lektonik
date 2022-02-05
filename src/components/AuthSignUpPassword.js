@@ -5,6 +5,7 @@ import "../styles/style.css";
 import eyeOpen from "../img/eyeOpen.svg";
 import eyeClose from "../img/eyeClose.svg";
 import 'regenerator-runtime/runtime';
+import { baseURL } from "../ProjectConstants.js";
 
 function AuthSignUpPassword() {
 
@@ -34,7 +35,7 @@ function AuthSignUpPassword() {
 
     async function onSubmitSignIn(e) {
         e.preventDefault();
-        await fetch('https://dev.lectonic.ru/api/auth/login/', {
+        await fetch(`${baseURL}/api/auth/login/`, {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -82,7 +83,7 @@ function AuthSignUpPassword() {
 
     async function onSubmitSignUp(e) {
         e.preventDefault();
-        await fetch("https://dev.lectonic.ru/api/auth/signup/", {
+        await fetch(`${baseURL}/api/auth/signup/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -92,7 +93,7 @@ function AuthSignUpPassword() {
             .then((response) => {
                 console.log("RESPONSE SIGNUP: ", response);
                 if (response.status == 201) {
-                    return fetch("https://dev.lectonic.ru/api/auth/login/", {
+                    return fetch(`${baseURL}/api/auth/login/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

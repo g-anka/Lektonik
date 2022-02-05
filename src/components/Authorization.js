@@ -5,6 +5,7 @@ import "../styles/style.css";
 import eyeOpen from "../img/eyeOpen.svg";
 import eyeClose from "../img/eyeClose.svg";
 import 'regenerator-runtime/runtime';
+import { baseURL } from "../ProjectConstants.js";
 
 function Authorization() {
 
@@ -36,7 +37,7 @@ function Authorization() {
 
     async function onSubmitSignIn(e) {
         e.preventDefault();
-        await fetch('https://dev.lectonic.ru/api/auth/login/', {
+        await fetch(`${baseURL}/api/auth/login/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
