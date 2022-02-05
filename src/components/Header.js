@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
 
@@ -6,7 +7,9 @@ function Header(props){
 
     return(
       <header className="header">
-          <img className="header-logo" src={require("../img/header_logo.svg").default} alt="логотип" />
+          <Link to="/">
+              <img className="header-logo" src={require("../img/header_logo.svg").default} alt="логотип" />
+          </Link>
 
           <nav className="header__nav">
               <img className="header__nav-search"

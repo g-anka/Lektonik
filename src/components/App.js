@@ -8,26 +8,28 @@ import PersonalDetailsForm from "./PersonalDetailsForm";
 import NotFoundPage from "./NotFoundPage";
 import Footer from "./Footer";
 import UserProfile from "./UserProfile";
+import Header from "./Header";
+import ChangePassword from "./ChangePassword";
 
 
 function App(){
  //   const isAuthentikated = !!token;
 
     return(
-        <div className="App">
-            <main className="main">
-
-            <Routes>
-                <Route path ="/" element={<Main />} />
-                <Route path ="/verify_email" element={<VerifyEmail />} />
-                <Route path ="/continue_registration" element={<ContinueRegistration />} />
-                <Route path ="/user_info-form" element={<PersonalDetailsForm />} />
-                <Route path ="/user_profile" element={<UserProfile />} />
-                <Route path ="*" element={<NotFoundPage />} />
-            </Routes>
+        <>
+            <main>
+                <Routes>
+                    <Route path ="/" element={<Main />} />
+                    <Route path ="/verify_email" element={<VerifyEmail />} />
+                    <Route path ="/continue_registration" element={<ContinueRegistration />} />
+                    <Route path ="/user_info-form" element={<PersonalDetailsForm />} />
+                    <Route path ="/user_profile" element={<UserProfile />} />
+                    <Route path ="/change_password" element={<ChangePassword />} />
+                    <Route path ="*" element={<NotFoundPage />} />
+                </Routes>
             </main>
             <Footer />
-        </div>
+        </>
     )
 }
 

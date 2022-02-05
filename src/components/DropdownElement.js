@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/dropdownelement.css";
-import arrow from "../img/Vector.svg";
+import arrow from "../img/back-arrow.svg";
 
 export default function DropDownElement(props) {
   let { selectDetails } = props;

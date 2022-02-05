@@ -13,6 +13,7 @@ function Authorization() {
     //вывод текста ошибки под инпутами
     const [errorMessageEmail, setErrorMessageEmail] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
+    const [errorM, setErrorM] = useState("");
 
 //ВХОД
 //изменение значений в инпутах
@@ -95,10 +96,30 @@ function Authorization() {
         console.log("VALUE: ", signUpValue)
     }
 
+//валидация почты
+    let post = signUpValue.email;
+    let text = "Это поле не может быть пустым";
+    let text2 = "Некорректная почта";
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let result = re.test(post.toLowerCase());
+
+
+
+    console.log("result @", post.toLowerCase());
+    console.log("result", result);
+
 //отправка данных на сервер
 //ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
     function onSubmitSignUpEmail(e) {
         e.preventDefault();
+
+        let inputEmail = signUpValue.email;
+
+        switch(inputEmail) {
+            case "":
+                setErrorM("Поле не может быть пустым");
+                break;
+        }
         window.sessionStorage.setItem("email", signUpValue.email);
         console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
         navigate("/verify_email");
@@ -118,14 +139,16 @@ function Authorization() {
     function handleSignInShow() {
         setSignInShown(true);
         setSignUpShown(false);
+        setEmailForgottenShown(false);
     }
 
     function handleSignUpShow() {
         setSignInShown(false);
         setSignUpShown(true);
+        setEmailForgottenShown(false);
     }
 
-//Показать / скрыть пароль
+//Показать / скрыть пароль на входе
     const [hiddenSignIn, setHiddenSignIn] = useState(true);
 
     function handleHiddenSignIn() {
@@ -133,11 +156,30 @@ function Authorization() {
     }
 
 
+
+//Блок Забыл пароль, смена пароля
+    const [emailForgottenShown, setEmailForgottenShown ] = useState(false);
+    const [emailChangePassword, setEmailChangePassword] = useState("");
+
+    function onEmailChangePassword(e) {
+        setEmailChangePassword(e.target.value);
+    }
+
+    function handlePasswordForgotten() {
+        setSignInShown(false);
+        setEmailForgottenShown (true);
+    }
+
+    function onSubmitPasswordChange() {
+        //пока нет api
+        navigate("/change_password")
+    }
+
     return (
         <div className="auth">
             <div className="auth__header">
                 <h2 onClick={handleSignInShow}
-                    style={{color: signInShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Вход</h2>
+                    style={{color: signInShown || emailForgottenShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Вход</h2>
 
                 <h2 onClick={handleSignUpShow}
                     style={{color: signUpShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Регистрация</h2>
@@ -155,7 +197,7 @@ function Authorization() {
                            value={signInValue.email}
                            onChange={onChangeSignIn}
                            style={{borderBottom: errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
-                    {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
+                        {errorM && <div className="form__input-error">{errorM}</div>}
                     </div>
 
                     <div className="auth__form__input-wrapper">
@@ -174,7 +216,8 @@ function Authorization() {
                         onClick={handleHiddenSignIn} />
                     </div>
 
-                    <div className="auth__form__password-forgotten">Забыли пароль?</div>
+                    <div className="auth__form__password-forgotten"
+                         onClick={handlePasswordForgotten}>Забыли пароль?</div>
 
                     <div className="auth__form__checkbox-wrapper signIn">
                         <input className="auth__form__checkbox-switch"
@@ -191,12 +234,13 @@ function Authorization() {
                             onClick={onSubmitSignIn}>Войти</button>
                 </form>
 
+                {/* пока вход через соц сети не используется
                 <div className="auth__socials">
                     <span>или</span>
                     <button className="auth__socials__btn-google"><img src={require("../img/google-icon.svg").default}/>Войти через Google</button>
                     <button className="auth__socials__btn-fb"><img src={require("../img/fb-icon.svg").default}/>Войти через Facebook</button>
                     <button className="auth__socials__btn-vk"><img src={require("../img/vk-icon.svg").default}/>Войти через VK</button>
-                </div>
+                </div> */}
 
                 <div className="auth__bottom-text">Ещё нет аккаунта? <h5 onClick={handleSignUpShow}>Зарегистрироваться</h5></div>
 
@@ -213,6 +257,7 @@ function Authorization() {
                            placeholder="E-mail"
                            value={signUpValue.email}
                            onChange={onChangeSignUp} />
+                        {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
                     </div>
 
                     <div className="auth__form__checkbox-wrapper">
@@ -230,6 +275,29 @@ function Authorization() {
                                 onClick={onSubmitSignUpEmail}>Зарегистрироваться</button>
                 </form>
             </div>
+
+                {/* Блок Забыл пароль*/}
+                <div className="auth__password-forgotten"
+                     style={{display: emailForgottenShown ? "block" : "none"}}>
+                    <div className="auth__text">Смена пароля</div>
+                    <form className="auth__form">
+                        <div className="auth__form__input-wrapper">
+                            <input className="form__input"
+                                   name="email_password-forgotten"
+                                   type="email"
+                                   placeholder="E-mail"
+                                   value={emailChangePassword}
+                                   onChange={onEmailChangePassword} />
+                            <div className="auth__password-forgotten__text">Ссылка на смену пароля будет выслана вам по e-mail</div>
+                        </div>
+
+                        <button className="btn"
+                                type="submit"
+                                onClick={onSubmitPasswordChange}>Продолжить</button>
+                        <h5 className="auth__password-forgotten__text-bottom"
+                            onClick={handleSignInShow}>Авторизоваться</h5>
+                    </form>
+                </div>
         </div>
     )
 };

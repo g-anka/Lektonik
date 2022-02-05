@@ -10,6 +10,7 @@ header {
     width: 170px;
     height: 30px;
     margin-left: 60px;
+    cursor: pointer;
 }
 
 .header__nav {

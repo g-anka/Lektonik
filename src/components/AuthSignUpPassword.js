@@ -123,11 +123,13 @@ function AuthSignUpPassword() {
     function handleSignInShow() {
         setSignInShown(true);
         setSignUpShown(false);
+        setEmailForgottenShown(false);
     }
 
     function handleSignUpShow() {
         setSignInShown(false);
         setSignUpShown(true);
+        setEmailForgottenShown(false);
     }
 
 //Показать / скрыть пароль на входе
@@ -138,23 +140,37 @@ function AuthSignUpPassword() {
     }
 
 //Показать / скрыть пароль на регистрации
-    const [hiddenSignUp1, setHiddenSignUp1] = useState(true);
-    const [hiddenSignUp2, setHiddenSignUp2] = useState(true);
+   const [hiddenSignUp, setHiddenSignUp] = useState(true);
 
-    function handleHiddenSignUp1() {
-        setHiddenSignUp1(!hiddenSignUp1)
+    function handleHiddenSignUp() {
+        setHiddenSignUp(!hiddenSignUp)
     }
 
-    function handleHiddenSignUp2() {
-        setHiddenSignUp2(!hiddenSignUp2)
+
+//Блок Забыл пароль, смена пароля
+    const [emailForgottenShown, setEmailForgottenShown ] = useState(false);
+    const [emailChangePassword, setEmailChangePassword] = useState("");
+
+    function onEmailChangePassword(e) {
+        setEmailChangePassword(e.target.value);
+        console.log("xtr, ", emailChangePassword)
     }
 
+    function handlePasswordForgotten() {
+        setSignInShown(false);
+        setEmailForgottenShown (true);
+    }
+
+    function onSubmitPasswordChange() {
+        //пока нет api
+        navigate("/change_password")
+    }
 
     return (
         <div className="auth">
             <div className="auth__header">
                 <h2 onClick={handleSignInShow}
-                    style={{color: signInShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Вход</h2>
+                    style={{color: signInShown || emailForgottenShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Вход</h2>
 
                 <h2 onClick={handleSignUpShow}
                     style={{color: signUpShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Регистрация</h2>
@@ -188,7 +204,8 @@ function AuthSignUpPassword() {
                             onClick={handleHiddenSignIn} />
                     </div>
 
-                    <div className="auth__form__password-forgotten">Забыли пароль?</div>
+                    <div className="auth__form__password-forgotten"
+                         onClick={handlePasswordForgotten}>Забыли пароль?</div>
 
                     <div className="auth__form__checkbox-wrapper signIn">
                         <input className="auth__form__checkbox-switch"
@@ -205,12 +222,13 @@ function AuthSignUpPassword() {
                             onClick={onSubmitSignIn}>Войти</button>
                 </form>
 
+                {/* пока вход через соц сети не используется
                 <div className="auth__socials">
                     <span>или</span>
                     <button className="auth__socials__btn-google"><img src={require("../img/google-icon.svg").default}/>Войти через Google</button>
                     <button className="auth__socials__btn-fb"><img src={require("../img/fb-icon.svg").default}/>Войти через Facebook</button>
                     <button className="auth__socials__btn-vk"><img src={require("../img/vk-icon.svg").default}/>Войти через VK</button>
-                </div>
+                </div> */}
 
                 <div className="auth__bottom-text">Ещё нет аккаунта? <h5 onClick={handleSignUpShow}>Зарегистрироваться</h5></div>
 
@@ -223,22 +241,22 @@ function AuthSignUpPassword() {
                     <div className="auth__form__input-wrapper">
                         <input className="form__input"
                                name="password"
-                               type={ hiddenSignUp1 ? "password" : "text" }
+                               type={ hiddenSignUp ? "password" : "text" }
                                placeholder="Пароль"
                                value={signUpValue.password}
                                onChange={onChangeSignUp}
                         />
                         <img
                             className="password-icon password1"
-                            src={ hiddenSignUp1 ? eyeClose : eyeOpen}
-                            alt={ hiddenSignUp1 ? "показать" : "скрыть"}
-                            onClick={handleHiddenSignUp1} />
+                            src={ hiddenSignUp ? eyeClose : eyeOpen}
+                            alt={ hiddenSignUp ? "показать" : "скрыть"}
+                            onClick={handleHiddenSignUp} />
                     </div>
 
                     <div className="auth__form__input-wrapper">
                         <input className="form__input password2"
                                name="password2"
-                               type={ hiddenSignUp2 ? "password" : "text" }
+                               type={ hiddenSignUp ? "password" : "text" }
                                placeholder="Повторите пароль"
                                value={signUpValue.password2}
                                onChange={onChangeSignUp}
@@ -246,18 +264,42 @@ function AuthSignUpPassword() {
                         />
                         <img
                             className="password-icon"
-                            src={ hiddenSignUp2 ? eyeClose : eyeOpen}
-                            alt={ hiddenSignUp2 ? "показать" : "скрыть"}
-                            onClick={handleHiddenSignUp2} />
+                            src={ hiddenSignUp ? eyeClose : eyeOpen}
+                            alt={ hiddenSignUp ? "показать" : "скрыть"}
+                            onClick={handleHiddenSignUp} />
                     {(signUpValue.password && signUpValue.password2) && (signUpValue.password !== signUpValue.password2) && <div className="form__input-error">Пароль не совпадает</div>}
                     </div>
 
                     <button className="btn auth__form__btn signUp"
                                 type="submit"
                                 onClick={onSubmitSignUp}
-                                disabled={(!signUpValue.password || !signUpValue.password2) || (signUpValue.password !== signUpValue.password2)}>Продолжить</button>
+                        /*disabled={(!signUpValue.password || !signUpValue.password2) || (signUpValue.password !== signUpValue.password2)}*/>Продолжить</button>
                     </form>
             </div>
+
+            {/* Блок Забыл пароль*/}
+            <div className="auth__password-forgotten"
+                 style={{display: emailForgottenShown ? "block" : "none"}}>
+                <div className="auth__text">Смена пароля</div>
+                <form className="auth__form">
+                    <div className="auth__form__input-wrapper">
+                        <input className="form__input"
+                               name="email_password-forgotten"
+                               type="email"
+                               placeholder="E-mail"
+                               value={emailChangePassword}
+                               onChange={onEmailChangePassword} />
+                        <div className="auth__password-forgotten__text">Ссылка на смену пароля будет выслана вам по e-mail</div>
+                    </div>
+
+                    <button className="btn"
+                            type="submit"
+                            onClick={onSubmitPasswordChange}>Продолжить</button>
+                    <h5 className="auth__password-forgotten__text-bottom"
+                        onClick={handleSignInShow}>Авторизоваться</h5>
+                </form>
+            </div>
+
         </div>
     )
 };
