@@ -1,0 +1,66 @@
+.choose-role {
+    margin: 60px auto 60px;
+    width: 772px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.choose-role h2 {
+    margin-left: 111px;
+}
+
+.choose-role >p {
+    margin: 28px 0px 36px 111px;
+    width: 405px;
+}
+
+.choose-role__btn-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.choose-role__btn {
+    background: var(--main-white);
+    border: 1px solid var(--main-black);
+    border-radius: 45px;
+    padding: 9px 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.choose-role__btn.open {
+    background: var(--main-blue);
+    border: none;
+    color: var(--main-white);
+    font-weight: bold;
+}
+
+.required-sign {
+    color: var(--add-pink);
+    height: 13px;
+    margin-left: 8px;
+}
+
+.required-sign.first {
+    margin-right: 42px;
+}
+
+.btn.finish-register {
+    margin-left: 111px;
+}
+
+/*БЛОК ЛЕКТОР */
+.choose-role__lecturer p {
+    margin-bottom: 16px;
+}
+
+.choose-role__lecturer__topics {
+    margin-left: 111px;
+    margin-bottom: 32px;
+}
+
+.choose-role__btn.example {
+    background: var(--add-grey);
+    border: none;
+}

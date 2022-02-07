@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Footer.css";
-import instagram from "../img/footer-instagram.svg";
-import vk from "../img/footer-vkontakte.svg";
-import fb from "../img/footer-facebook.svg";
+import instagram from "../public/footer-instagram.svg";
+import vk from "../public/footer-vkontakte.svg";
+import fb from "../public/footer-facebook.svg";
 
 export default function Footer(){
 

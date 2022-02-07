@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import DropDownElement from "./DropdownElement";
 import Header from "./Header";
-import "../styles/personaldetailsform.css";
-import placeIcon from "../img/location-icon.svg";
-import infoIcon from "../img/info-icon.svg";
-import profileSelected from "../img/header_profile-selected.svg";
-import profile from "../img/header_profile.svg";
+import "../styles/PersonalDetailsForm.css";
+import placeIcon from "../public/location-icon.svg";
+import infoIcon from "../public/info-icon.svg";
+import profileSelected from "../public/header_profile-selected.svg";
+import profile from "../public/header_profile.svg";
 
 
 export default function PersonalDetailsForm() {
@@ -54,7 +54,7 @@ export default function PersonalDetailsForm() {
       <Header src={profileSelected} />
 
       <div className="user-details-wrapper">
-        <h2 className="submain-title">Информация базового профиля</h2>
+        <h2 className="submain-title">Информация профиля</h2>
         <p className="general-text">Заполните информацию профиля.<br/>Это даст Вам возможность пользоваться сервисом.</p>
 
         <form className="user-details-form" onSubmit={(e) => handleAddEvent(e)}>
@@ -85,7 +85,6 @@ export default function PersonalDetailsForm() {
               type="text"
               placeholder="Отчество"
               onChange={(e) => handleInputChange(e, "userMiddleName")} />
-            <p className="special-sign">*</p>
           </div>
 
           <div className="input-with-icon">
@@ -115,9 +114,8 @@ export default function PersonalDetailsForm() {
               onChange={(e) => handleInputChange(e, "userSelfDescription")}
             ></textarea>
           </div>
-          <button className="btn btn-main" onClick={(e) => handleAddEvent(e)}>
-            <div>Завершить регистрацию</div>
-          </button>
+          <button className="btn"
+                  onClick={(e) => handleAddEvent(e)}>Продолжить</button>
         </form>
       </div>
     </>

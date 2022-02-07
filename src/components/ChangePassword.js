@@ -12,9 +12,9 @@ export default function ChangePassword() {
 
     return (
         <>
-            <Header src={require("../img/header_profile-selected.svg").default}/>
+            <Header src={require("../public/header_profile-selected.svg").default}/>
             <img className="change-password__back-arrow"
-                 src={require("../img/back-arrow.svg").default}
+                 src={require("../public/back-arrow.svg").default}
                  onClick={backToRegistration}/>
             <div className="change-password__text">
                 <h2>Смена пароля</h2>

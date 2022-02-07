@@ -24,6 +24,12 @@ h2:first-child {
     margin-bottom: 28px;
 }
 
+.auth__text p {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 8px 0px 0px;
+}
+
 h5 {
     color: var(--main-blue);
     cursor: pointer;

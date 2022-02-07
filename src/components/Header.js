@@ -8,12 +8,12 @@ function Header(props){
     return(
       <header className="header">
           <Link to="/">
-              <img className="header-logo" src={require("../img/header_logo.svg").default} alt="логотип" />
+              <img className="header-logo" src={require("../public/header_logo.svg").default} alt="логотип" />
           </Link>
 
           <nav className="header__nav">
               <img className="header__nav-search"
-                   src={require("../img/icon-search.svg").default}
+                   src={require("../public/icon-search.svg").default}
                    alt="поиск" />
 
               <img className="header__nav-profile"

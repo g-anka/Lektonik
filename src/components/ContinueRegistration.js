@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import Header from "./Header";
 import Modal from "./Modal";
-import profileSelected from "../img/header_profile-selected.svg";
-import profile from "../img/header_profile.svg";
+import profileSelected from "../public/header_profile-selected.svg";
+import profile from "../public/header_profile.svg";
 import AuthSignUpPassword from "./AuthSignUpPassword";
 
 

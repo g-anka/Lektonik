@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../styles/dropdownelement.css";
-import arrow from "../img/back-arrow.svg";
+import "../styles/DropdownElement.css";
+import downArrow from "../public/down-arrow.svg";
 
 export default function DropDownElement(props) {
   let { selectDetails } = props;
@@ -22,8 +22,8 @@ export default function DropDownElement(props) {
           e.target.classList.contains("select-top") ||
           e.target.classList.contains("select-default") ||
           e.target.classList.contains("select-choosen") ||
-          e.target.classList.contains("img-close") ||
-          e.target.classList.contains("img-open")
+          e.target.classList.contains("public-close") ||
+          e.target.classList.contains("public-open")
         ) {
           console.log("click is inside");
         } else {
@@ -75,7 +75,7 @@ export default function DropDownElement(props) {
           ></input>
           <img
             className={selectIsOpen ? "img-open" : "img-close"}
-            src={arrow}
+            src={downArrow}
             alt="select-icon"
             onClick={toggleSelectIsOpen}
           ></img>

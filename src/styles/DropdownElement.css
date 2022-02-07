@@ -1,4 +1,9 @@
+input {
+  border: none;
+}
+
 .select-section {
+
   flex: 0 1 172px;
   font-size: 14px;
   line-height: 17px;
@@ -29,7 +34,7 @@
 }
 
 .select-top {
-  border: 1px solid #b4b4b4;
+  border: 1px solid var(--add-darkGrey);
   border-radius: 18px;
 
   display: flex;

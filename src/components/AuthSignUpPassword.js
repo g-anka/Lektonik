@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import {useNavigate, Link} from "react-router-dom";
 import "../styles/Authorization.css";
 import "../styles/style.css";
-import eyeOpen from "../img/eyeOpen.svg";
-import eyeClose from "../img/eyeClose.svg";
+import eyeOpen from "../public/eyeOpen.svg";
+import eyeClose from "../public/eyeClose.svg";
 import 'regenerator-runtime/runtime';
 import { baseURL } from "../ProjectConstants.js";
 
@@ -238,9 +238,9 @@ function AuthSignUpPassword() {
                 {/* пока вход через соц сети не используется
                 <div className="auth__socials">
                     <span>или</span>
-                    <button className="auth__socials__btn-google"><img src={require("../img/google-icon.svg").default}/>Войти через Google</button>
-                    <button className="auth__socials__btn-fb"><img src={require("../img/fb-icon.svg").default}/>Войти через Facebook</button>
-                    <button className="auth__socials__btn-vk"><img src={require("../img/vk-icon.svg").default}/>Войти через VK</button>
+                    <button className="auth__socials__btn-google"><public src={require("../public/google-icon.svg").default}/>Войти через Google</button>
+                    <button className="auth__socials__btn-fb"><public src={require("../public/fb-icon.svg").default}/>Войти через Facebook</button>
+                    <button className="auth__socials__btn-vk"><public src={require("../public/vk-icon.svg").default}/>Войти через VK</button>
                 </div> */}
 
                 <div className="auth__bottom-text">Ещё нет аккаунта? <h5 onClick={handleSignUpShow}>Зарегистрироваться</h5></div>
@@ -249,7 +249,8 @@ function AuthSignUpPassword() {
 
             {/* Блок Регистрация Пароль*/}
             <div style={{display: signUpShown ? "block" : "none"}}>
-                <div className="auth__text">Придумайте пароль</div>
+                <div className="auth__text">Придумайте пароль
+                <p>Не менее 8 символов, латиница, минимум одна заглавная буква, минимум одна цифра</p></div>
                 <form className="auth__form">
                     <div className="auth__form__input-wrapper">
                         <input className="form__input"

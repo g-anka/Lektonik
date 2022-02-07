@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import UserProfile from "./UserProfile";
 import Header from "./Header";
 import ChangePassword from "./ChangePassword";
+import ChooseRole from "./ChooseRole";
 
 
 function App(){
@@ -22,7 +23,8 @@ function App(){
                     <Route path ="/" element={<Main />} />
                     <Route path ="/verify_email" element={<VerifyEmail />} />
                     <Route path ="/continue_registration" element={<ContinueRegistration />} />
-                    <Route path ="/user_info-form" element={<PersonalDetailsForm />} />
+                    <Route path ="/user_basic-info" element={<PersonalDetailsForm />} />
+                    <Route path ="/user_choose-role" element={<ChooseRole />} />
                     <Route path ="/user_profile" element={<UserProfile />} />
                     <Route path ="/change_password" element={<ChangePassword />} />
                     <Route path ="*" element={<NotFoundPage />} />

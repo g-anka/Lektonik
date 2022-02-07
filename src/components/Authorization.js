@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../styles/Authorization.css";
 import "../styles/style.css";
-import eyeOpen from "../img/eyeOpen.svg";
-import eyeClose from "../img/eyeClose.svg";
+import eyeOpen from "../public/eyeOpen.svg";
+import eyeClose from "../public/eyeClose.svg";
 import 'regenerator-runtime/runtime';
 import { baseURL } from "../ProjectConstants.js";
 
@@ -52,15 +52,16 @@ export default function Authorization() {
             }).then((data) => {
                console.log("data: ", data);
                //ниже идет проверка наличия ключа в объекте дата.
-                // Они именуются по-разному и в каждом описана своя ошибка. Надо подумать как еще это решить.
-           /*  if ("non_field_errors" in data) {
+            if ("non_field_errors" in data) {
                  setErrorMessagePassword(data.non_field_errors[0]);
-             } if ("detail" in data) {
-                    setErrorMessageEmail(data.detail);
-                } if ("auth_token" in data) {
-                    localStorage.setItem("auth_token", data.auth_token);
-                  //  navigate("/user_profile");
-                }*/
+             } if ("email" in data) {
+                setErrorMessageEmail(data.email[0])
+                } if ("password" in data) {
+                    setErrorMessagePassword(data.password[0])
+                } if (data.status == "logged_in") {
+                    console.log("cookie: ", document.cookie);
+                    navigate("/user_profile");
+                }
             })
             .catch((error) => {
                 console.log("ERROR SignIn: ", error);
@@ -185,7 +186,7 @@ export default function Authorization() {
                            placeholder="E-mail"
                            value={signInValue.email}
                            onChange={onChangeSignIn}
-                           style={{borderBottom: errorMessagePassword || errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
+                           style={{borderBottom: errorMessageEmail ? "1px solid var(--add-pink)" : ""}}/>
                         {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
                     </div>
 
@@ -226,9 +227,9 @@ export default function Authorization() {
                 {/* пока вход через соц сети не используется
                 <div className="auth__socials">
                     <span>или</span>
-                    <button className="auth__socials__btn-google"><img src={require("../img/google-icon.svg").default}/>Войти через Google</button>
-                    <button className="auth__socials__btn-fb"><img src={require("../img/fb-icon.svg").default}/>Войти через Facebook</button>
-                    <button className="auth__socials__btn-vk"><img src={require("../img/vk-icon.svg").default}/>Войти через VK</button>
+                    <button className="auth__socials__btn-google"><public src={require("../public/google-icon.svg").default}/>Войти через Google</button>
+                    <button className="auth__socials__btn-fb"><public src={require("../public/fb-icon.svg").default}/>Войти через Facebook</button>
+                    <button className="auth__socials__btn-vk"><public src={require("../public/vk-icon.svg").default}/>Войти через VK</button>
                 </div> */}
 
                 <div className="auth__bottom-text">Ещё нет аккаунта? <h5 onClick={handleSignUpShow}>Зарегистрироваться</h5></div>

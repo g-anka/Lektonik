@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import Header from "./Header";
 import Modal from "./Modal";
 import Authorization from "./Authorization";
-import profileSelected from "../img/header_profile-selected.svg";
-import profile from "../img/header_profile.svg";
+import profileSelected from "../public/header_profile-selected.svg";
+import profile from "../public/header_profile.svg";
 import "../styles/Main.css";
 import Footer from "./Footer";
 
@@ -23,7 +23,7 @@ function Main(){
                 <Authorization />
             </Modal>
             <img className="main__illustration"
-                 src={require("../img/main-pic.svg").default}
+                 src={require("../public/main-pic.svg").default}
                  alt="Платформа для лекторов и не только"/>
         </>
     )

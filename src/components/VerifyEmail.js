@@ -8,7 +8,7 @@ function VerifyEmail(){
 
     return(
         <>
-            <Header src={require("../img/header_profile-selected.svg").default}/>
+            <Header src={require("../public/header_profile-selected.svg").default}/>
 
             <div className="verify__wrapper">
                 <h1>Подтверждение e-mail</h1>
