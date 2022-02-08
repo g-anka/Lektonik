@@ -175,3 +175,18 @@ h5 {
     position: absolute;
     right: 0;
 }
+
+/*Текст, сопровождающий иконки*/
+.role-text {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 700;
+    color: var(--main-blue);
+}
+
+.addRole-text, .additional-text {
+    font-size: 12px;
+    line-height: 15px;
+    text-decoration-line: underline;
+    color: var(--main-blue);
+}

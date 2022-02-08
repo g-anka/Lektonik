@@ -11,7 +11,7 @@ function VerifyEmail(){
             <Header src={require("../public/header_profile-selected.svg").default}/>
 
             <div className="verify__wrapper">
-                <h1>Подтверждение e-mail</h1>
+                <h2>Подтверждение e-mail</h2>
                 <p>Мы отправили письмо на электронную почту</p>
                 <p id="verify__email">{window.sessionStorage.getItem("email")}</p>
                 <p>Для завершения регистрации перейдите по ссылке, указанной в письме.<br/>Если письмо не пришло, пожалуйста, проверьте папку Спам.</p>
