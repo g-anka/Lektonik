@@ -19,7 +19,8 @@ function Main(){
                 onOpenAuth={() => setOpen(true)}/>
             <Modal
                 isOpened={open}
-                onModalClose={() => setOpen(false)}>
+                onModalClose={() => setOpen(false)}
+                styleBody={{width: "432px"}}>
                 <Authorization />
             </Modal>
             <img className="main__illustration"

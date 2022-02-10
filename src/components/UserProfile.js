@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./Header";
 import "../styles/UserProfile.css";
 import avatarDefault from "../public/avatar-default.svg";
@@ -11,9 +11,17 @@ import addRoleIcon from "../public/addRole-icon.svg";
 import addRoleIconHover from "../public/addRole-icon-hover.svg";
 import additionalIcon from "../public/additional-icon.svg";
 import additionalIconHover from "../public/additional-icon-hover.svg";
+import Authorization from "./Authorization";
+import Modal from "./Modal";
+import ChangeAvatar from "./ChangeAvatar";
 
 function UserProfile(){
 
+    const [openChangeAvatar, setOpenChangeAvatar] = useState(false); //открытие модального окна для загрузки фото
+
+    function openModalChangeAvatar() {
+        setOpenChangeAvatar(true)
+    }
 
 
     return(
@@ -26,7 +34,8 @@ function UserProfile(){
                             src={avatarDefault}/>
                        <Icons className="profile__up__avatar-photoIcon"
                               srcNormal={photoIcon}
-                              srcHovered={photoIconHover}/>
+                              srcHovered={photoIconHover}
+                              onClick={openModalChangeAvatar}/>
                    </div>
                    <div className="profile__up__name-wrapper">
                        <h1>Имя</h1>
@@ -46,6 +55,12 @@ function UserProfile(){
                    <p className="additional-text">Дополнительная информация</p>
                </div>
            </div>
+           <Modal
+               isOpened={openChangeAvatar}
+               onModalClose={() => setOpenChangeAvatar(false)}
+               styleBody={{width: "654px"}}>
+               <ChangeAvatar />
+           </Modal>
        </div>
     )
 };

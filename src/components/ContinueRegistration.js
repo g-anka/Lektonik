@@ -17,7 +17,8 @@ function ContinueRegistration(){
                 onOpenAuth={() => setOpen(true)}/>
             <Modal
                 isOpened={open}
-                onModalClose={() => setOpen(false)}>
+                onModalClose={() => setOpen(false)}
+                styleBody={{width: "432px"}}>
                 <AuthSignUpPassword />
             </Modal>
         </div>

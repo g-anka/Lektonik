@@ -168,7 +168,7 @@ export default function Authorization() {
     return (
         <div className="auth">
             <div className="auth__header">
-                <h2 onClick={handleSignInShow}
+                <h2 className="auth__header__SignIn-text" onClick={handleSignInShow}
                     style={{color: signInShown || emailForgottenShown ? "var(--main-blue)" : "var(--add-darkGrey)"}}>Вход</h2>
 
                 <h2 onClick={handleSignUpShow}

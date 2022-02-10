@@ -1,5 +1,7 @@
 .auth {
     margin: 0px 40px;
+    padding-top: 56px;
+    padding-bottom: 60px;
     position: relative;
 }
 
@@ -13,7 +15,7 @@ h2 {
     margin: 0px;
 }
 
-h2:first-child {
+.auth__header__SignIn-text {
     padding-right: 47px;
 }
 
@@ -43,7 +45,7 @@ h5 {
     font-size: 12px;
     line-height: 15px;
     text-decoration: underline;
-    margin: 12px 0px 23px;
+    margin: 12px 0px 20px;
     cursor: pointer;
 }
 
@@ -139,7 +141,6 @@ h5 {
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    padding-bottom: 60px;
     display: block;
 }
 

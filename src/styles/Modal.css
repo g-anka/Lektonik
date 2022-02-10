@@ -22,10 +22,11 @@
     margin: 108px auto;
     border-radius: 18px;
     box-shadow: 0px 4px 40px rgba(0, 12, 63, 0.2);
-    width: 432px;
 }
 
 .modal__close {
-    margin: 16px 0px 16px 392px;
+    float: right;
+    margin-top: 16px;
+    margin-right: 16px;
     cursor: pointer
 }
