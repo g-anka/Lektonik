@@ -1,7 +1,6 @@
 .chooseRole__steps__text-wrapper {
     width: 61%;
     margin: 60px auto 12px;
-    color: var(--add-darkGrey);
     display: flex;
     justify-content: space-between;
 }

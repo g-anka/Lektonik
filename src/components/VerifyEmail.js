@@ -15,11 +15,7 @@ function VerifyEmail(){
                 <p>Мы отправили письмо на электронную почту</p>
                 <p id="verify__email">{window.sessionStorage.getItem("email")}</p>
                 <p>Для завершения регистрации перейдите по ссылке, указанной в письме.<br/>Если письмо не пришло, пожалуйста, проверьте папку Спам.</p>
-                <p className="verify__email__text-bottom">Ошиблись в вводе данных? <h5>Ввести корректный e-mail</h5></p>
-
-                <Link to="/continue_registration">
-                    <button className="btn temporary__btn">Продолжить регистрацию</button>
-                </Link>
+                <div className="verify__email__text-bottom">Ошиблись в вводе данных? <h5>Ввести корректный e-mail</h5></div>
             </div>
         </>
     )

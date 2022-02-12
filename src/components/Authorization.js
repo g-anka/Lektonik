@@ -12,6 +12,8 @@ export default function Authorization() {
     const navigate = useNavigate(); //Для перехода
 
     //вывод текста ошибки под инпутами
+    const [errorSignUpEmail, setErrorSignUpEmail] = useState("");
+
     const [errorMessageEmail, setErrorMessageEmail] = useState("");
     const [errorMessagePassword, setErrorMessagePassword] = useState("");
     const [errorM, setErrorM] = useState("");
@@ -92,27 +94,41 @@ export default function Authorization() {
         console.log("VALUE: ", signUpValue)
     }
 
-//валидация почты
-    let post = signUpValue.email;
-    let text = "Это поле не может быть пустым";
-    let text2 = "Некорректная почта";
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let result = re.test(post.toLowerCase());
-
-
-
-    console.log("result @", post.toLowerCase());
-    console.log("result", result);
-
 //отправка данных на сервер
-//ввод e-mail (временно так, пока не готово api с отправкой письма на почту)
+    let userSignUpEmail = new URLSearchParams();
+    userSignUpEmail.append("email", `${signUpValue.email}`);
+    console.log("userSignUpEmail: ", userSignUpEmail)
 
-    function onSubmitSignUpEmail(e) {
+    async function onSubmitSignUpEmail(e) {
         e.preventDefault();
-
-       window.sessionStorage.setItem("email", signUpValue.email);
-       console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
-       navigate("/verify_email");
+        await fetch(`${baseURL}/api/email/email_confirmation/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: userSignUpEmail,
+            credentials: 'include',
+        })
+            .then((response) => {
+                console.log("RESPONSE SignUpEmail: ", response);
+                setErrorSignUpEmail(""); //очищаем стейты, чтоб при новом запросе прошлая ошибка не оставалась
+                return response.json();
+            }).then((data) => {
+                console.log("data: ", data);
+                //ниже идет проверка наличия ключа в объекте дата.
+                if ("email" in data) {
+                    setErrorSignUpEmail(data.email[0])
+                } else if (data.status == "success") {
+                    window.sessionStorage.setItem("email", signUpValue.email); //чтоб отобразить почту на /verify_email
+                    navigate("/verify_email")
+                }
+            })
+            .catch((error) => {
+                console.log("ERROR SignIn: ", error);
+            })
+      // window.sessionStorage.setItem("email", signUpValue.email);
+       //console.log("this session e-mail: ", window.sessionStorage.getItem("email"));
+      // navigate("/verify_email");
     }
 
 //Checkbox согласие на обработку персональных данных
@@ -246,8 +262,9 @@ export default function Authorization() {
                            type="email"
                            placeholder="E-mail"
                            value={signUpValue.email}
-                           onChange={onChangeSignUp} />
-                        {errorMessageEmail && <div className="form__input-error">{errorMessageEmail}</div>}
+                           onChange={onChangeSignUp}
+                           style={{borderBottom: errorSignUpEmail ? "1px solid var(--add-pink)" : ""}}/>
+                        {errorSignUpEmail && <div className="form__input-error">{errorSignUpEmail}</div>}
                     </div>
 
                     <div className="auth__form__checkbox-wrapper">
